@@ -6,6 +6,7 @@ import MultiAINode from "./MultiAINode";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import TextNode from "./TextNode";
 import BlockNode from "./BlockNode";
+import Oracle from "./orancle";
 
 ////
 const GraphComponent: React.FC = () => {
@@ -162,6 +163,127 @@ const GraphComponent: React.FC = () => {
         },
       },
     });
+
+    register({
+      shape: "oracle",
+      width: 350,
+      height: 50,
+      component: Oracle,
+      ports: {
+        groups: {
+          left: {
+            position: "left",
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: "#2d8cf0",
+                fill: "#fff",
+                strokeWidth: 1,
+              },
+            },
+            markup: [
+              {
+                tagName: "circle",
+                selector: "circle",
+              },
+            ],
+          },
+          top: {
+            position: {
+              name: "top",
+              args: {
+                x: "33%",
+                y: 0,
+              },
+            },
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: "#2d8cf0",
+                fill: "#fff",
+                strokeWidth: 2,
+              },
+            },
+            markup: [
+              {
+                tagName: "circle",
+                selector: "circle",
+              },
+            ],
+          },
+          right: {
+            position: {
+              name: "absolute",
+              args: {
+                x: "100%",
+                y: "50%",
+              },
+            },
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: "#2d8cf0",
+                fill: "#fff",
+                strokeWidth: 2,
+              },
+              plus: {
+                d: "M -4 0 L 4 0 M 0 -4 L 0 4",
+                stroke: "#2d8cf0",
+                strokeWidth: 2,
+              },
+              line: {
+                stroke: "#2d8cf0",
+                strokeWidth: 2,
+                targetMarker: null,
+              },
+            },
+            markup: [
+              {
+                tagName: "path",
+                selector: "line",
+              },
+              {
+                tagName: "circle",
+                selector: "circle",
+              },
+              {
+                tagName: "path",
+                selector: "plus",
+              },
+            ],
+          },
+          bottom: {
+            position: {
+              name: "absolute",
+              args: {
+                x: "50%",
+                y: "100%",
+              },
+            },
+            attrs: {
+              circle: {
+                r: 6,
+                magnet: true,
+                stroke: "#2d8cf0",
+                fill: "#fff",
+                strokeWidth: 2,
+                cursor: "pointer",
+              },
+            },
+            markup: [
+              {
+                tagName: "circle",
+                selector: "circle",
+              },
+            ],
+          },
+        },
+      },
+    });
+
     register({
       shape: "text-node",
       width: 200,
@@ -554,6 +676,13 @@ const GraphComponent: React.FC = () => {
           onDragStart={(event) => handleDragStart(event, "text-node")}
         >
           Text Node
+        </div>
+        <div
+          className="p-2 mb-2 border border-gray-300 rounded bg-white cursor-pointer"
+          draggable
+          onDragStart={(event) => handleDragStart(event, "oracle")}
+        >
+          Oracle
         </div>
       </div>
 

@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ColorPicker } from "./ColorPicker";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 interface EditSheetProps {
   isOpen: boolean;
@@ -38,24 +40,20 @@ export const EditSheet: React.FC<EditSheetProps> = ({
         <SheetHeader>
           <SheetTitle>Edit Node Appearance</SheetTitle>
           <SheetDescription>
-            Customize the colors of your Multi-AI node.
+            Customize the colors and heading of your Multi-AI node.
           </SheetDescription>
         </SheetHeader>
 
         <div className="grid gap-6 py-4">
-          {/* Heading Field */}
-          <div>
-            <label htmlFor="heading" className="block text-sm font-medium">
-              Heading
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="heading">Heading</Label>
+            <Input
               id="heading"
-              type="text"
-              className="mt-2 p-2 block w-full border rounded-md text-sm"
               value={heading}
               onChange={(e) => onHeadingChange(e.target.value)}
             />
           </div>
+
           <ColorPicker
             label="Background Color"
             color={backgroundColor}
